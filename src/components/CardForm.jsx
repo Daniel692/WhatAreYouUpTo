@@ -7,6 +7,8 @@ function FormCard( {post, handleSubmit} ) {
     const [body, setBody] = useState("")
     const [image, setImage] = useState("")
     const imgPlaceholder = "https://media.istockphoto.com/vectors/thumbnail-image-vector-graphic-vector-id1147544807?k=20&m=1147544807&s=612x612&w=0&h=pBhz1dkwsCMq37Udtp9sfxbjaMl27JUapoyYpQm0anc="
+    
+    const [error, setError] = useState("") 
 
     useEffect(() => {
         if(post) {
@@ -22,6 +24,16 @@ function FormCard( {post, handleSubmit} ) {
         event.preventDefault()
         const formData = {title: title, uid: userName, body: body, image: image}
         handleSubmit(formData)
+        if (formData.title === "" || formData.uid === "" || formData.body === "" || formData.image === "") {
+            setError(
+                <IonItem>
+                <p style={{color: "red"}}>All fields must be filled</p>
+                </IonItem>
+            )
+        } else {
+            handleSubmit(formData)
+        }
+        
     }
 
     return (
@@ -40,10 +52,12 @@ function FormCard( {post, handleSubmit} ) {
             </IonItem>
             <IonItem>
                 <IonLabel position="stacked">Image URL</IonLabel>
-                <IonInput placeholder="Choose the URL for your image" type="url" onIonChange={event => setImage(event.target.value)}></IonInput>
+                <IonInput placeholder="Choose the URL for your image" onIonChange={event => setImage(event.target.value)}></IonInput>
             </IonItem>
+                {error}
                 <IonImg style={{height: "200px"}} className="ion-padding" src={image === "" ? imgPlaceholder : image} ></IonImg>
                 <IonButton type="submit" expand="block">Create</IonButton>
+                
 
         </form>
     )
