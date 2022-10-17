@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { IonContent,IonFabButton, IonFab, IonIcon, IonHeader, IonList, IonPage, IonTitle, IonToolbar, IonRefresher, IonRefresherContent, useIonViewWillEnter } from '@ionic/react';
 import { add } from "ionicons/icons";
-import NewCard from '../components/NewCard';
+import SingleCard from '../components/SingleCard';
 import './Home.css';
-
 
 const Home = () => {
   const [posts, setPosts] = useState([])
@@ -47,9 +46,9 @@ const Home = () => {
         </IonRefresher>
         <IonList>
           {
-            posts.map(post => <NewCard title={post.title} image={post.image} uid={post.uid} body={post.body} key={post.id}/>)
+            posts.map(post => <SingleCard title={post.title} image={post.image} uid={post.uid} body={post.body} key={post.id} id={post.id}/>
+            )
           }
-          <NewCard title="My Title" name="my name"/>
         </IonList>
       </IonContent>
       <IonFab vertical="bottom" horizontal="end" slot="fixed">
