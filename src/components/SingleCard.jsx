@@ -23,8 +23,7 @@ const SingleCard = (props) => {
           <IonCardContent>
             {props.body}
           </IonCardContent>
-<IonButton shape="round" expand="block" color="secondary" onClick={goToPost}>Edit</IonButton>
-
+            <IonButton shape="round" expand="block" color="secondary" onClick={goToPost}>Edit</IonButton>
         </IonCard>
   );
 };

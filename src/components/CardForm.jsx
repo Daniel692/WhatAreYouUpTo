@@ -23,7 +23,7 @@ function FormCard( {post, handleSubmit} ) {
     const submitForm = (event) => {
         event.preventDefault()
         const formData = {title: title, uid: userName, body: body, image: image}
-        handleSubmit(formData)
+        // handleSubmit(formData)
         if (formData.title === "" || formData.uid === "" || formData.body === "" || formData.image === "") {
             setError(
                 <IonItem>
@@ -40,23 +40,24 @@ function FormCard( {post, handleSubmit} ) {
         <form onSubmit={submitForm}>
             <IonItem>
                 <IonLabel position="stacked">Title:</IonLabel>
-                <IonInput placeholder="Type your title here" onIonChange={event => setTitle(event.target.value)}></IonInput>
+                <IonInput value={title} placeholder="Type your title here" onIonChange={event => setTitle(event.target.value)}></IonInput>
             </IonItem>
             <IonItem>
                 <IonLabel position="stacked">User Name:</IonLabel>
-                <IonInput placeholder="User name" onIonChange={event => setUserName(event.target.value)}></IonInput>
+                <IonInput value={userName} placeholder="User name" onIonChange={event => setUserName(event.target.value)}></IonInput>
             </IonItem>
             <IonItem>
                 <IonLabel position="stacked">Description:</IonLabel>
-                <IonTextarea placeholder="Type your description here" onIonChange={event => setBody(event.target.value)}></IonTextarea>
+                <IonTextarea value={body} placeholder="Type your description here" onIonChange={event => setBody(event.target.value)}></IonTextarea>
             </IonItem>
             <IonItem>
                 <IonLabel position="stacked">Image URL</IonLabel>
-                <IonInput placeholder="Choose the URL for your image" onIonChange={event => setImage(event.target.value)}></IonInput>
+                <IonInput value={image} placeholder="Choose the URL for your image" onIonChange={event => setImage(event.target.value)}></IonInput>
             </IonItem>
                 {error}
                 <IonImg style={{height: "200px"}} className="ion-padding" src={image === "" ? imgPlaceholder : image} ></IonImg>
-                <IonButton type="submit" expand="block">Create</IonButton>
+                <IonButton type="submit" expand="block">Save</IonButton>
+                
                 
 
         </form>
