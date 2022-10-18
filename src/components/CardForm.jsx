@@ -1,5 +1,7 @@
-import { IonButton, IonImg, IonInput, IonItem, IonLabel, IonTextarea } from "@ionic/react"
-import { useEffect, useState } from "react"
+import { IonItem, IonLabel, IonInput, IonTextarea, IonImg, IonButton, IonIcon } from "@ionic/react";
+import { useState, useEffect } from "react";
+import { Camera, CameraResultType } from "@capacitor/camera";
+import { camera } from "ionicons/icons";
 
 function FormCard( {post, handleSubmit} ) {
     const [title, setTitle] = useState("")
@@ -18,6 +20,18 @@ function FormCard( {post, handleSubmit} ) {
             setImage(post.image)
         }
     }, [post])
+
+    async function takePicture() {
+        const imageOptions = {
+            quality: 80,
+            width: 500,
+            allowEditing: true,
+            resultType: CameraResultType.DataUrl
+        };
+        const image = await Camera.getPhoto(imageOptions);
+        const imageUrl = image.dataUrl;
+        setImage(imageUrl);
+    }
     
 
     const submitForm = (event) => {
@@ -53,6 +67,12 @@ function FormCard( {post, handleSubmit} ) {
             <IonItem>
                 <IonLabel position="stacked">Image URL</IonLabel>
                 <IonInput value={image} placeholder="Choose the URL for your image" onIonChange={event => setImage(event.target.value)}></IonInput>
+            </IonItem>
+            <IonItem onClick={takePicture} lines="none">
+                <IonLabel>Choose Image</IonLabel>
+                <IonButton>
+                    <IonIcon slot="icon-only" icon={camera} />
+                </IonButton>
             </IonItem>
                 {error}
                 <IonImg style={{height: "200px"}} className="ion-padding" src={image === "" ? imgPlaceholder : image} ></IonImg>

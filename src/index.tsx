@@ -4,6 +4,15 @@ import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 
+import ReactDOM from 'react-dom';
+
+import { defineCustomElements } from '@ionic/pwa-elements/loader';
+
+ReactDOM.render(<App />, document.getElementById('root'));
+
+// Call the element loader after the app has been rendered the first time
+defineCustomElements(window);
+
 const container = document.getElementById('root');
 const root = createRoot(container!);
 root.render(
