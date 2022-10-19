@@ -12,12 +12,12 @@ const Home = () => {
 
   // fetch posts from database 
   async function fetchPosts() {
-    const dbUrl = "https://nimble-monument-344608-default-rtdb.europe-west1.firebasedatabase.app/posts.json"
+    const dbUrl = process.env.REACT_APP_DB_URL + "/posts.json"
     const response = await fetch(dbUrl)
     const posts = await response.json()
     // change the posts from object to array
     const postsArray = Object.keys(posts).map(key => ({id: key, ...posts[key]}))
-    setPosts(postsArray)
+    setPosts(postsArray.reverse())
   }
 
   async function refreshPosts(e) {
@@ -37,16 +37,16 @@ const Home = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>WhereAreYou.com</IonTitle>
+          <IonTitle>WhatAreYouUpTo</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonRefresher slot="fixed" onIonRefresh={refreshPosts}>
           <IonRefresherContent></IonRefresherContent>
         </IonRefresher>
-        <IonList>
+        <IonList className='container'>
           {
-            posts.map(post => <SingleCard title={post.title} image={post.image} uid={post.uid} body={post.body} key={post.id} id={post.id}/>
+            posts.map(post => <SingleCard className="grid-container" title={post.title} location={post.location} image={post.image} uid={post.uid} body={post.body} key={post.id} id={post.id}/>
             )
           }
         </IonList>

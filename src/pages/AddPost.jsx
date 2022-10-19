@@ -7,8 +7,8 @@ const AddPost = () => {
 
     async function handleSubmit(newPost) {
 
-        const url = 'https://nimble-monument-344608-default-rtdb.europe-west1.firebasedatabase.app/posts.json'
-        await fetch(url, {
+        const dbUrl = process.env.REACT_APP_DB_URL + '/posts.json'
+        await fetch(dbUrl, {
             method: "POST",
             body: JSON.stringify(newPost)
         })

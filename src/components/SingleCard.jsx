@@ -1,4 +1,3 @@
-
 import { IonCard, IonButton, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCardContent, IonImg } from '@ionic/react';
 import { useHistory} from 'react-router-dom';
 
@@ -19,6 +18,7 @@ const SingleCard = (props) => {
             <IonImg className='post-img' src={props.image}/>
             <IonCardTitle>{props.title}</IonCardTitle>
             <IonCardSubtitle>From: {props.uid}</IonCardSubtitle>
+            <IonCardSubtitle>Location: {props.location}</IonCardSubtitle>
           </IonCardHeader>
           <IonCardContent>
             {props.body}

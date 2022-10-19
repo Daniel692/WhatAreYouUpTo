@@ -13,7 +13,7 @@ export default function EditPostPage() {
 
     useEffect(() => {
         async function getPost() {
-            const res = await fetch(`https://nimble-monument-344608-default-rtdb.europe-west1.firebasedatabase.app/posts/${id}.json`)
+            const res = await fetch(process.env.REACT_APP_DB_URL + `/posts/${id}.json`)
             const post = await res.json()
             setPost(post)
             console.log(post)
@@ -21,8 +21,9 @@ export default function EditPostPage() {
         getPost()
       }, [])
 
+
     async function updatePost(post, postToUpdate) {
-        const dbUrl = `https://nimble-monument-344608-default-rtdb.europe-west1.firebasedatabase.app/posts/${id}.json`
+        const dbUrl = process.env.REACT_APP_DB_URL + `/posts/${id}.json`
         await fetch(dbUrl, {
             method: "PUT",
             body: JSON.stringify({ ...post, ...postToUpdate })
@@ -31,8 +32,8 @@ export default function EditPostPage() {
     }
 
     async function deletePost() {
-        const url = `https://nimble-monument-344608-default-rtdb.europe-west1.firebasedatabase.app/posts/${id}.json`;
-        const response = await fetch(url, {
+        const dbUrl = process.env.REACT_APP_DB_URL + `/posts/${id}.json`;
+        const response = await fetch(dbUrl, {
             method: "DELETE"
         });
         console.log(response);

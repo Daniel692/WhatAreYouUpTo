@@ -22,7 +22,7 @@ function FormCard( {post, handleSubmit} ) {
     }
 
     async function getLocation(latitude, longitude) {
-        const key = "14de60fd94d4d8753fe8a277ba88667a";
+        const key = process.env.REACT_APP_MY_API_KEY
         const res = await fetch(
             `http://api.positionstack.com/v1/reverse?access_key=${key}&output=json&query=${latitude},${longitude}`
         );
@@ -63,7 +63,7 @@ function FormCard( {post, handleSubmit} ) {
         if (formData.title === "" || formData.uid === "" || formData.body === "" || formData.image === "") {
             setError(
                 <IonItem>
-                <p style={{color: "red"}}>All fields must be filled</p>
+                    <p style={{color: "red"}}>All fields must be filled</p>
                 </IonItem>
             )
         } else {
@@ -74,7 +74,7 @@ function FormCard( {post, handleSubmit} ) {
     function confirmLocation() {
         presentLocationDialog({
             title: 'Confirm location',
-            message: 'Do you want to use Precise Location?',
+            message: 'Do you want to use Geolocation?',
             buttons: [
                 {
                     text: 'No',

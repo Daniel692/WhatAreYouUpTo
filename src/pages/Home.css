@@ -1,0 +1,11 @@
+@media only screen and (min-width: 1200px) {
+    .container {
+        display: grid;
+        grid-template-columns: 4fr 4fr 4fr;
+        grid-gap: 1rem;
+      }
+    
+    .grid-container {
+        display: inline-grid;
+    }
+}
